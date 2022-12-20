@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean mIsListening=false;
     private TextView mUserInfoText, mUserUtteranceOutput;
 
+    ArrayList mCommandList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCommands() {
-        ArrayList mCommandList=new ArrayList();
+        mCommandList=new ArrayList();
         mCommandList.add("Cart");
         mCommandList.add("Cancel");
         mCommandList.add("Home");
@@ -161,6 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleCommand(String command) {
         // Function to handle user commands
+        if (mCommandList.contains(command)){
+            // Successful utterance, notify user
+            Toast.makeText(this, "Executing: "+command, Toast.LENGTH_LONG).show();
+        }else{
+            // Unsuccessful utterance, show failure message on screen
+            Toast.makeText(this, "Could not recognize command", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void VerifyAudioPermissions() {
